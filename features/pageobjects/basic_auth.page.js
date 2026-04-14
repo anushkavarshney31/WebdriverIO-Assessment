@@ -1,14 +1,16 @@
-// import { $ } from "@wdio/globals";
-// import Page from "./page.js";
+import { $ } from "@wdio/globals";
+import Page from "./page.js";
 
-class BasicAuthPage {
+class BasicAuthPage extends Page {
   get message() {
     return $(".example > p");
   }
+
   async login(username, password) {
-    await this.open(username, password);
+    await this.openWithAuth(username, password);
   }
-  open(username, password) {
+
+  openWithAuth(username, password) {
     return browser.url(
       `https://${username}:${password}@the-internet.herokuapp.com/basic_auth`
     );

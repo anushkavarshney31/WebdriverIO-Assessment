@@ -1,8 +1,11 @@
-class DropdownPage {
+import { $ } from "@wdio/globals";
+import Page from "./page.js";
+
+class InputsPage extends Page {
   get elements() {
     return {
       header: () => $("h3"),
-      input: () => $("/html/body/div[2]/div/div/div/div/input"),
+      input: () => $('input[type="number"]'),
     };
   }
 
@@ -11,4 +14,4 @@ class DropdownPage {
   }
 }
 
-export default new DropdownPage();
+export default new InputsPage();
