@@ -1,9 +1,11 @@
-class DropdownPage {
+import { $ } from "@wdio/globals";
+import Page from "./page.js";
+
+class DropdownPage extends Page {
   get elements() {
     return {
       header: () => $("h3"),
       dropdown: () => $("select#dropdown"),
-      selectedOption: () => $('option[selected="selected"]'),
     };
   }
 
@@ -13,7 +15,9 @@ class DropdownPage {
   }
 
   async selectedOptionText() {
-    const selectedOption = await this.elements.selectedOption();
+    const dropdown = await this.elements.dropdown();
+    const value = await dropdown.getValue();
+    const selectedOption = await dropdown.$(`option[value="${value}"]`);
     return await selectedOption.getText();
   }
 }

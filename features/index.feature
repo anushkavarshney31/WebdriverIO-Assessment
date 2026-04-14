@@ -4,7 +4,7 @@ Feature: The Internet Guinea Pig Website
   Scenario Outline: As a user,  I can navigate to all pages
     Given I am at the index page
     When I click the <page> link
-    Then I should be driected to the selected page
+    Then I should be directed to the selected page
 
     Examples:
       | page                          |

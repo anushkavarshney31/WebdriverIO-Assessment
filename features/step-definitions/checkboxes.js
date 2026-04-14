@@ -3,10 +3,11 @@ import { expect } from "@wdio/globals";
 import checkboxesPage from "../pageobjects/checkboxes.page.js";
 
 When(/^I select checkbox (\d)$/, async function (num) {
-  this.checkbox = await checkboxesPage.elements.checkbox(num);
+  const list = await checkboxesPage.elements.checkboxes();
+  this.checkbox = list[num - 1];
   await checkboxesPage.select(num);
 });
 
 Then(/^The checkbox should be checked$/, async function () {
-  await expect(this.checkbox).toHaveAttribute("checked");
+  await expect(this.checkbox).toBeSelected();
 });

@@ -11,6 +11,8 @@ export default class Page {
       Checkboxes: "checkboxes",
       Dropdown: "dropdown",
       inputs: "inputs",
+      Inputs: "inputs",
+      login: "login",
 
       "A/B Testing": "abtest",
       "Add/Remove Elements": "add_remove_elements/",
@@ -60,7 +62,8 @@ export default class Page {
   }
 
   async click(name) {
-    const anchor = await $(`a[href="/${this.paths[name]}"]`);
+    const path = this.paths[name] || name;
+    const anchor = await $(`a[href="/${path}"]`);
     await anchor.click();
   }
 
@@ -68,8 +71,14 @@ export default class Page {
    * Opens a sub page of the page
    * @param path path of the sub page (e.g. /path/to/page.html)
    */
-  open(path = "") {
-    if (path in this.paths) return this.open(this.paths[path]);
-    return browser.url(`${this.base}/${path}`);
+  async open(path = "") {
+    if (path in this.paths) {
+      const resolvedPath = this.paths[path];
+      // Avoid infinite recursion if path and resolvedPath are same
+      if (resolvedPath !== path) {
+        return this.open(resolvedPath);
+      }
+    }
+    await browser.url(`${this.base}/${path}`);
   }
 }
