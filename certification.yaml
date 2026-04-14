@@ -1,0 +1,16 @@
+#This file is used as an audit trail for repo certification as part of Cloud Efficiency.
+#Put a link to the PR as the value for a checklist item that has been certified
+#Use "N/A" for items that are not applicable for this repo
+#When all items have been certified set the repo_certified item to "true" and add the certification_date value in the yyyymmdd format
+
+repo_certified: "" #empty or true
+certification_date: "" #yyyymmdd
+standard_checklist:
+  security_scans_for_code: ""
+  standard_cicd: ""
+  standard_secrets_management: ""
+  standard_repo_security: ""
+iac_checklist:
+  security_scans_for_iac: ""
+  standard_iac: ""
+  standard_tagging: ""
